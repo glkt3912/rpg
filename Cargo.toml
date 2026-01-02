@@ -1,6 +1,6 @@
 [package]
 name = "rpg"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2024"
 description = "A secure command-line password generator written in Rust"
 license = "MIT"
@@ -8,6 +8,13 @@ license = "MIT"
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
 rand = "0.8"
+arboard = "3.4"
+colored = "2.1"
+atty = "0.2"
+
+[dev-dependencies]
+assert_cmd = "2.0"
+predicates = "3.0"
 
 [profile.release]
 opt-level = 3
