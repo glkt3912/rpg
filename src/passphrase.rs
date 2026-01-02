@@ -46,7 +46,7 @@ impl PassphraseGenerator {
     pub fn generate(&self) -> String {
         let mut rng = rand::thread_rng();
         let words: Vec<&str> = WORDLIST
-            .choose_multiple(&mut rng, self.word_count)
+            .choose_multiple(&mut rng, self.config.word_count)
             .copied()
             .collect();
         words.join("-")
