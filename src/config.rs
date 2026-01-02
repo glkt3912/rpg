@@ -52,10 +52,10 @@ impl PasswordConfig {
 }
 
 /// CLI引数定義
-#[derive(Parser, Debug)]
+#[derive(Parser, Debug, Clone)]
 #[command(
     name = "rpg",
-    version = "0.1.0",
+    version = "0.2.0",
     about = "A secure command-line password generator",
     long_about = None
 )]
@@ -65,20 +65,40 @@ pub struct CliArgs {
     pub length: usize,
 
     /// Exclude uppercase letters
-    #[arg(long, default_value = "false")]
+    #[arg(long)]
     pub no_uppercase: bool,
 
     /// Exclude lowercase letters
-    #[arg(long, default_value = "false")]
+    #[arg(long)]
     pub no_lowercase: bool,
 
     /// Exclude digits
-    #[arg(long, default_value = "false")]
+    #[arg(long)]
     pub no_digits: bool,
 
     /// Exclude symbols
-    #[arg(long, default_value = "false")]
+    #[arg(long)]
     pub no_symbols: bool,
+
+    /// Copy password to clipboard
+    #[arg(short = 'c', long)]
+    pub copy: bool,
+
+    /// Number of passwords to generate
+    #[arg(short = 'n', long, default_value = "1")]
+    pub number: usize,
+
+    /// Generate passphrase instead of password
+    #[arg(long, conflicts_with_all = ["length", "no_uppercase", "no_lowercase", "no_digits", "no_symbols"])]
+    pub passphrase: bool,
+
+    /// Number of words in passphrase (only with --passphrase)
+    #[arg(long, default_value = "4", requires = "passphrase")]
+    pub words: usize,
+
+    /// Disable colored output
+    #[arg(long)]
+    pub no_color: bool,
 }
 
 impl From<CliArgs> for PasswordConfig {
@@ -157,6 +177,11 @@ mod tests {
             no_lowercase: false,
             no_digits: false,
             no_symbols: true,
+            copy: false,
+            number: 1,
+            passphrase: false,
+            words: 4,
+            no_color: false,
         };
         let config = PasswordConfig::from(args);
         assert_eq!(config.length, 20);
