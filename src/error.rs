@@ -43,7 +43,11 @@ impl fmt::Display for RpgError {
                 write!(f, "Error: Clipboard operation failed: {}", msg)
             }
             RpgError::InvalidGenerationCount(count) => {
-                write!(f, "Error: Invalid generation count: {} (must be >= 1)", count)
+                write!(
+                    f,
+                    "Error: Invalid generation count: {} (must be >= 1)",
+                    count
+                )
             }
             RpgError::Other(msg) => write!(f, "Error: {}", msg),
         }

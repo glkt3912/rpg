@@ -1,5 +1,8 @@
 use clap::Parser;
-use rpg::{clipboard, colorize, CliArgs, PassphraseConfig, PassphraseGenerator, PasswordConfig, PasswordGenerator, RpgError};
+use rpg::{
+    CliArgs, PassphraseConfig, PassphraseGenerator, PasswordConfig, PasswordGenerator, RpgError,
+    clipboard, colorize,
+};
 use std::process;
 
 fn main() {
