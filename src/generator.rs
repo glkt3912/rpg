@@ -4,27 +4,26 @@ use crate::error::Result;
 use rand::seq::SliceRandom;
 
 /// パスワードジェネレータ
+///
+/// 文字セットは初期化時にキャッシュされます。
 pub struct PasswordGenerator {
     config: PasswordConfig,
+    charset: Vec<char>,
 }
 
 impl PasswordGenerator {
-    /// 新しいジェネレータを作成
     pub fn new(config: PasswordConfig) -> Result<Self> {
-        // 設定の検証
         config.validate()?;
-        Ok(Self { config })
+        let charset_str = build_charset(&config);
+        let charset: Vec<char> = charset_str.chars().collect();
+        Ok(Self { config, charset })
     }
 
-    /// 暗号学的に安全な方法でパスワードを生成
     pub fn generate(&self) -> String {
-        let charset = build_charset(&self.config);
-        let charset_chars: Vec<char> = charset.chars().collect();
-
         let mut rng = rand::thread_rng();
 
         (0..self.config.length)
-            .map(|_| *charset_chars.choose(&mut rng).unwrap())
+            .map(|_| *self.charset.choose(&mut rng).unwrap())
             .collect()
     }
 }

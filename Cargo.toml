@@ -1,7 +1,7 @@
 [package]
 name = "rpg"
 version = "0.2.0"
-edition = "2024"
+edition = "2021"
 description = "A secure command-line password generator written in Rust"
 license = "MIT"
 
