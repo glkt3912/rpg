@@ -1,3 +1,7 @@
+//! パスフレーズ生成モジュール
+//!
+//! 覚えやすいパスフレーズ（複数の単語をハイフンで繋げたもの）を生成します。
+
 use crate::error::{Result, RpgError};
 use crate::wordlist::WORDLIST;
 use rand::seq::SliceRandom;
@@ -36,7 +40,6 @@ pub struct PassphraseGenerator {
 }
 
 impl PassphraseGenerator {
-    /// 新しいジェネレータを作成
     pub fn new(config: PassphraseConfig) -> Result<Self> {
         config.validate()?;
         Ok(Self { config })

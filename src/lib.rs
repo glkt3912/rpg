@@ -1,6 +1,6 @@
 //! rpg - Rust Password Generator
 //!
-//! 暗号学的に安全なランダムパスワード生成ライブラリ
+//! 暗号学的に安全なパスワードとパスフレーズを生成するCLIツール。
 
 pub mod charset;
 pub mod clipboard;
@@ -8,6 +8,7 @@ pub mod colorize;
 pub mod config;
 pub mod error;
 pub mod generator;
+pub mod output;
 pub mod passphrase;
 pub mod wordlist;
 
