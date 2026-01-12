@@ -17,6 +17,8 @@ pub enum RpgError {
     ClipboardError(String),
     /// 不正な生成個数
     InvalidGenerationCount(usize),
+    /// 出力するアイテムが空
+    EmptyOutput,
     /// その他のエラー
     Other(String),
 }
@@ -48,6 +50,9 @@ impl fmt::Display for RpgError {
                     "Error: Invalid generation count: {} (must be >= 1)",
                     count
                 )
+            }
+            RpgError::EmptyOutput => {
+                write!(f, "Error: No items to output")
             }
             RpgError::Other(msg) => write!(f, "Error: {}", msg),
         }

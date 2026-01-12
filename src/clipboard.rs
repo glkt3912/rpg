@@ -1,7 +1,10 @@
+//! クリップボード操作モジュール
+//!
+//! パスワードやパスフレーズをシステムクリップボードにコピーする機能を提供します。
+
 use crate::error::{Result, RpgError};
 use arboard::Clipboard;
 
-/// パスワードをクリップボードにコピー
 pub fn copy_to_clipboard(text: &str) -> Result<()> {
     let mut clipboard = Clipboard::new()
         .map_err(|e| RpgError::ClipboardError(format!("Failed to access clipboard: {}", e)))?;
